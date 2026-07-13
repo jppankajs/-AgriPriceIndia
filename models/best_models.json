@@ -1,0 +1,7 @@
+{
+  "Onion": "SARIMA",
+  "Potato": "Prophet",
+  "Rice": "ExpSmoothing (trend)",
+  "Tomato": "SMA-14",
+  "Wheat": "SARIMA (no season)"
+}

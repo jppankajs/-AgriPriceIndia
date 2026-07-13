@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+streamlit
+scikit-learn
+statsmodels
+prophet
+joblib
+python-dotenv
+kaggle==1.6.14

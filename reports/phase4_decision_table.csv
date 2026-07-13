@@ -1,0 +1,6 @@
+Crop,Current_Price,Forecast_End,Move_Pct,Threshold_Pct,Signal,Rationale,Model,Model_MAPE
+Onion,1200.0,3689.901101034368,207.49175841953064,176.3489694915864,Hold,Prices predicted to rise +207.5% (above 176.3% threshold),SARIMA,117.5659796610576
+Potato,1227.5,770.4418346196096,-37.23488109005217,19.110530821645163,Monitor,Override: model likely extrapolating a since-reversed downtrend; recent recovery pattern (Rs 1000 to Rs 1228 over Feb-Jun 2025) not reflected in the forecast,Prophet,12.740353881096777
+Wheat,2480.0,2512.106561982739,1.2946194347878668,5.0,Monitor,Predicted move (+1.3%) is below noise threshold (5.0%),SARIMA (no season),0.8198087098886907
+Tomato,1785.0,,,,Monitor,Monitor -- insufficient stable history (154-day window dominated by 2023 monsoon crisis anomaly),SMA-14,10.91441615488011
+Rice,3347.5,,,,Monitor,Monitor -- insufficient stable history (62 total days; 4-6 week forecast is largest proportional extrapolation in dataset),ExpSmoothing (trend),0.5764350701899201

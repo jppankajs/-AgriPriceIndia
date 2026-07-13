@@ -1,0 +1,50 @@
+# === Virtual Environment ===
+venv/
+.venv/
+env/
+
+# === Raw Data (large Kaggle downloads) ===
+data/raw/
+
+# === Large Processed Files ===
+data/processed/agri_prices_clean.csv
+
+# === Large Model Files (>10MB) ===
+models/sarima_potato.pkl
+models/sarima_onion.pkl
+models/sarima_wheat.pkl
+
+# === Python Cache ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# === Environment Variables ===
+.env
+*.env
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Compressed Archives ===
+*.zip
+*.tar.gz
+*.gz
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# === Kaggle Credentials (never commit!) ===
+kaggle.json
+~/.kaggle/
