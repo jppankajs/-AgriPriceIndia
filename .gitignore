@@ -10,9 +10,7 @@ data/raw/
 data/processed/agri_prices_clean.csv
 
 # === Large Model Files (>10MB) ===
-models/sarima_potato.pkl
-models/sarima_onion.pkl
-models/sarima_wheat.pkl
+# Note: Models are actually < 50MB, so they are safe to push to GitHub!
 
 # === Python Cache ===
 __pycache__/
