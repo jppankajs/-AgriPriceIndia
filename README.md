@@ -6,6 +6,9 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)](https://streamlit.io/)
 [![Data Source](https://img.shields.io/badge/Data-Agmarknet%20%7C%20data.gov.in-green)](https://data.gov.in/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/jppankajs/-AgriPriceIndia)
+
+**🔗 GitHub:** [github.com/jppankajs/-AgriPriceIndia](https://github.com/jppankajs/-AgriPriceIndia)
 
 ---
 
@@ -156,10 +159,24 @@ Regenerate these by running the pipeline scripts in order: Phase 0 → 1 → 3.
 
 ---
 
+## 🚀 Demo
+
+> **Note:** This dashboard runs locally via Streamlit. There is no hosted live demo at this time.
+> To see it in action, clone the repo and follow the [Running the Dashboard](#-running-the-dashboard) instructions above.
+
+To deploy on Streamlit Cloud yourself:
+1. Fork/clone this repo
+2. Connect to [share.streamlit.io](https://share.streamlit.io)
+3. Set main file: `app/phase5_dashboard.py`
+4. Ensure `data/processed/agri_prices_daily_national.csv` and model `.pkl` files are present
+
+---
+
 ## 👤 Author
 
 **Pankaj** — Data Analytics Internship Project  
-GitHub: [@jppankajs](https://github.com/jppankajs)
+GitHub: [@jppankajs](https://github.com/jppankajs)  
+Repository: [AgriPriceIndia](https://github.com/jppankajs/-AgriPriceIndia)
 
 ---
 
