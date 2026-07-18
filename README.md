@@ -3,7 +3,7 @@
 > A rigorous, data-driven tool for forecasting Indian agricultural commodity prices and generating plain-language market intervention signals.
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-red?logo=streamlit)](https://agripriceindia.streamlit.app/)
 [![Data Source](https://img.shields.io/badge/Data-Agmarknet%20%7C%20data.gov.in-green)](https://data.gov.in/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/jppankajs/-AgriPriceIndia)
@@ -161,14 +161,11 @@ Regenerate these by running the pipeline scripts in order: Phase 0 → 1 → 3.
 
 ## 🚀 Demo
 
-> **Note:** This dashboard runs locally via Streamlit. There is no hosted live demo at this time.
-> To see it in action, clone the repo and follow the [Running the Dashboard](#-running-the-dashboard) instructions above.
+**🔗 [Live Dashboard: AgriPrice India](https://agripriceindia.streamlit.app/)**
 
-To deploy on Streamlit Cloud yourself:
-1. Fork/clone this repo
-2. Connect to [share.streamlit.io](https://share.streamlit.io)
-3. Set main file: `app/phase5_dashboard.py`
-4. Ensure `data/processed/agri_prices_daily_national.csv` and model `.pkl` files are present
+You can access the live interactive dashboard above. The app provides market interventions and forecasting signals.
+
+Alternatively, to run the dashboard locally, follow the [Running the Dashboard](#-running-the-dashboard) instructions above.
 
 ---
 
