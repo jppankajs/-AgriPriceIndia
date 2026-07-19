@@ -3,7 +3,7 @@
 > A rigorous, data-driven tool for forecasting Indian agricultural commodity prices and generating plain-language market intervention signals.
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-red?logo=streamlit)](https://agripriceindia.streamlit.app/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-red?logo=streamlit)](https://exy6dhbxciybhacpa3wve5.streamlit.app/)
 [![Data Source](https://img.shields.io/badge/Data-Agmarknet%20%7C%20data.gov.in-green)](https://data.gov.in/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/jppankajs/-AgriPriceIndia)
@@ -167,7 +167,7 @@ Regenerate these by running the pipeline scripts in order: Phase 0 → 1 → 3.
 
 ## 🚀 Demo
 
-**🔗 [Live Dashboard: AgriPrice India](https://agripriceindia.streamlit.app/)**
+**🔗 [Live Dashboard: AgriPrice India](https://exy6dhbxciybhacpa3wve5.streamlit.app/)**
 
 You can access the live interactive dashboard above. The app provides market interventions and forecasting signals.
 
