@@ -28,8 +28,8 @@ SUPPRESS = {'Onion','Potato'}
 
 CARD_NOTES = {
     'Potato': "This model's forecast turns negative by week 8 — a literal impossibility for a market price — which is why its output isn't shown here. The underlying cause: Prophet is extrapolating a since-reversed downtrend (₹1,000 → ₹1,228 recovery, Feb–Jun 2025) that the model never saw.",
-    'Tomato': "Monitor — 154-day window dominated by the 2023 monsoon price crisis; no stable baseline to forecast from.",
-    'Rice':   "Monitor — only 62 days of history; an 8-week forecast would extrapolate further than the available data supports.",
+    'Tomato': "Monitor — only 61 data points from 2023, dominated by the monsoon price crisis; no stable baseline to forecast from.",
+    'Rice':   "Monitor — only 25 aggregated data points (62 raw records); an 8-week forecast would extrapolate further than the data supports.",
     'Onion':  "MAPE of 117.57% — larger than the forecast itself. Only the directional signal, not the magnitude, should be trusted.",
     'Wheat':  "Forecast excludes annual seasonality — only 8 months of history exist, with Mar–May entirely missing.",
 }
@@ -40,8 +40,8 @@ TIER_BADGES = {
     'Onion':  'Full seasonal model',
     'Potato': 'Full seasonal model',
     'Wheat':  'Limited — no seasonal claim, 8 months history',
-    'Tomato': 'Insufficient history — Monitor only, 154 days',
-    'Rice':   'Insufficient history — Monitor only, 62 days',
+    'Tomato': 'Insufficient history — Monitor only, 61 data points',
+    'Rice':   'Insufficient history — Monitor only, 25 aggregated data points',
 }
 TIER_COLORS = {
     'Onion':  '#3fb950',  # green — full model
@@ -77,11 +77,17 @@ def gen_forecast(crop, _series):
             w = int(mn.split('-')[1]) if '-' in mn else 14
             d = pd.date_range(last+pd.Timedelta(days=1), periods=n, freq='D')
             return pd.DataFrame({'forecast':_series.iloc[-w:].mean(),'lower':np.nan,'upper':np.nan}, index=d)
-        elif 'ExpSmoothing' in mn or 'ETS' in mn:
+        elif 'ExpSmoothing' in mn or 'ETS' in mn or 'Smoothing' in mn:
             m = joblib.load(os.path.join(MDL_DIR, f'ets_{crop.lower()}.pkl'))
             d = pd.date_range(last+pd.Timedelta(days=1), periods=n, freq='D')
-            return pd.DataFrame({'forecast':m.forecast(n).values,'lower':np.nan,'upper':np.nan}, index=d)
-        return None
+            try:
+                fc_vals = m.forecast(n)
+            except Exception:
+                fc_vals = pd.Series([float(_series.iloc[-1])] * n)
+            return pd.DataFrame({'forecast': np.array(fc_vals, dtype=float), 'lower': np.nan, 'upper': np.nan}, index=d)
+        # fallback: flat forecast at last known price
+        d = pd.date_range(last+pd.Timedelta(days=1), periods=n, freq='D')
+        return pd.DataFrame({'forecast': float(_series.iloc[-1]), 'lower': np.nan, 'upper': np.nan}, index=d)
     if 'Prophet' in mn:
         m = joblib.load(os.path.join(MDL_DIR, f'prophet_{crop.lower()}.pkl'))
         fut = pd.DataFrame({'ds':pd.date_range(last+pd.Timedelta(days=1), periods=n, freq='D')})
@@ -230,10 +236,14 @@ if fc_plausible:
             name='80% CI', hoverinfo='skip'))
 
 # Divider line
-ylo = float(np.nanmin([series.min(), np.nanmin(fc_df['forecast'].values)] if fc_plausible else [series.min()]))
-yhi = float(np.nanmax([series.max(), np.nanmax(fc_df['forecast'].values)] if fc_plausible else [series.max()]))
-pad = (yhi-ylo)*0.05
-fig.add_trace(go.Scatter(x=[last_date,last_date], y=[ylo-pad, yhi+pad], mode='lines',
+if fc_plausible and fc_df is not None:
+    ylo = float(np.nanmin([series.min(), np.nanmin(fc_df['forecast'].values)]))
+    yhi = float(np.nanmax([series.max(), np.nanmax(fc_df['forecast'].values)]))
+else:
+    ylo = float(series.min())
+    yhi = float(series.max())
+pad = (yhi - ylo) * 0.05 if yhi != ylo else ylo * 0.05
+fig.add_trace(go.Scatter(x=[last_date, last_date], y=[ylo - pad, yhi + pad], mode='lines',
     line=dict(color='#484f58', width=1, dash='dot'), showlegend=False, hoverinfo='skip'))
 
 fig.update_layout(template=None, plot_bgcolor='#0a0e17', paper_bgcolor='#0a0e17',
