@@ -57,7 +57,7 @@ AgriPriceIndia/
 │   ├── prophet_wheat.pkl
 │   ├── sarima_onion.pkl
 │   ├── sarima_wheat.pkl
-│   └── sarima_potato.pkl       # ⚠️ ~30 MB — gitignored
+│   └── sarima_potato.pkl       # ~29 MB (tracked via git)
 │
 ├── reports/
 │   ├── figures/                # All EDA & forecast charts (PNG)
@@ -92,11 +92,11 @@ AgriPriceIndia/
 
 | Commodity | Best Model | Tier | Notes |
 |-----------|-----------|------|-------|
-| **Onion** | Prophet | 🟡 Directional | High seasonal volatility; point estimates suppressed |
-| **Potato** | Prophet | 🟡 Monitor-only | Structural break detected; forecast extrapolates downtrend |
-| **Wheat** | SARIMA | 🟢 Full | Low RMSE; stable seasonal pattern |
-| **Rice** | ETS | 🟢 Full | Smooth trend; reliable short-horizon forecast |
-| **Tomato** | ETS | 🟡 Directional | Extreme volatility; CI intervals very wide |
+| **Onion** | SARIMA | 🟢 Full seasonal model | MAPE 117.57% — directional signal only; point estimates suppressed |
+| **Potato** | Prophet | 🟢 Full seasonal model | Structural break detected; forecast extrapolates a since-reversed downtrend |
+| **Wheat** | SARIMA (no season) | 🟡 Limited | Only 8 months of history; no seasonal claim possible (Mar–May missing) |
+| **Rice** | ExpSmoothing (trend) | ⚪ Monitor-only | Only 25 aggregated data points (62 raw days); insufficient for reliable forecast |
+| **Tomato** | SMA-14 | ⚪ Monitor-only | Only 61 data points from 2023; dominated by monsoon price crisis |
 
 ---
 
@@ -134,19 +134,25 @@ streamlit run app/phase5_dashboard.py
 
 ---
 
-## 📁 Large Files (Not Tracked in Git)
+## 📁 Large Files
 
-The following files exceed GitHub's recommended size limit and are excluded via `.gitignore`:
+**Gitignored (not tracked):**
 
 | File | Size | Reason |
 |------|------|--------|
 | `data/raw/` | ~500 MB | Raw Kaggle download |
 | `data/processed/agri_prices_clean.csv` | ~62 MB | Full cleaned dataset |
-| `models/sarima_potato.pkl` | ~29 MB | SARIMA model for Potato |
-| `models/sarima_onion.pkl` | ~3.3 MB | SARIMA model for Onion |
-| `models/sarima_wheat.pkl` | ~4.8 MB | SARIMA model for Wheat |
 
 Regenerate these by running the pipeline scripts in order: Phase 0 → 1 → 3.
+
+**Tracked in Git (required for deployment):**
+
+| File | Size |
+|------|------|
+| `models/sarima_potato.pkl` | ~29 MB |
+| `models/sarima_onion.pkl` | ~3.3 MB |
+| `models/sarima_wheat.pkl` | ~4.8 MB |
+| `data/processed/agri_prices_daily_national.csv` | ~63 KB |
 
 ---
 
