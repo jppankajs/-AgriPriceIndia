@@ -26,6 +26,8 @@
 
 **Commodities Covered:** Onion · Potato · Wheat · Rice · Tomato
 
+🌐 **Deployed App:** [exy6dhbxciybhacpa3wve5.streamlit.app](https://exy6dhbxciybhacpa3wve5.streamlit.app/)
+
 ---
 
 ## 🏗️ Project Architecture
