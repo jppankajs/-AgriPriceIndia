@@ -17,6 +17,9 @@ DAILY_CSV = os.path.join(PROC_DIR, "agri_prices_daily_national.csv")
 KAGGLE_SLUG = "saurabhbadole/indian-agricultural-mandi-prices-20232025"
 COMMODITIES = ["Onion", "Potato", "Wheat", "Tomato", "Rice"]
 
+# Detect Streamlit Cloud (no Kaggle CLI / API key available)
+_ON_CLOUD = bool(os.environ.get("STREAMLIT_SHARING") or os.path.exists("/mount/src"))
+
 # ── refresh via Kaggle CLI (idempotent) ────────────────────────────────
 def _download_kaggle(force: bool = False) -> str | None:
     """Download the Kaggle dataset zip; return path to CSV or None."""
@@ -104,12 +107,14 @@ def _clean_raw(csv_path: str) -> pd.DataFrame:
 
 def refresh_data(force: bool = False) -> pd.DataFrame:
     """Main entry: download + clean → return national daily DataFrame."""
-    csv = _download_kaggle(force=force)
-    if csv and os.path.exists(csv):
-        df = _clean_raw(csv)
-        if not df.empty:
-            df.to_csv(DAILY_CSV, index=False)
-            return df
+    # On Streamlit Cloud, skip Kaggle CLI (no API key / CLI available)
+    if not _ON_CLOUD:
+        csv = _download_kaggle(force=force)
+        if csv and os.path.exists(csv):
+            df = _clean_raw(csv)
+            if not df.empty:
+                df.to_csv(DAILY_CSV, index=False)
+                return df
 
     # fallback: read existing processed file
     if os.path.exists(DAILY_CSV):
