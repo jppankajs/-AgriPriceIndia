@@ -1,1 +1,3 @@
 # System dependencies for Streamlit Cloud (if needed by prophet/pmdarima)
+build-essential
+python3-dev
