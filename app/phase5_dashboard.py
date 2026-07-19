@@ -52,14 +52,17 @@ TIER_COLORS = {
 }
 
 # ── Safe model loader ─────────────────────────────────────────────────
-def _safe_load_model(path: str):
-    """Load a joblib model file, returning None on any failure."""
+def _safe_load_model(path: str, silent: bool = False):
+    """Load a joblib model file, returning None on any failure.
+    When silent=True, failures are logged to console but not shown in the UI.
+    """
     try:
         if not os.path.exists(path):
             return None
         return joblib.load(path)
     except Exception as e:
-        st.warning(f"⚠️ Could not load model `{os.path.basename(path)}`: {type(e).__name__}")
+        if not silent:
+            st.warning(f"⚠️ Could not load model `{os.path.basename(path)}`: {type(e).__name__}")
         return None
 
 # ── Load all data ─────────────────────────────────────────────────────
@@ -129,7 +132,8 @@ def gen_forecast(crop, _series):
             return pd.DataFrame({'forecast': float(_series.iloc[-1]), 'lower': np.nan, 'upper': np.nan}, index=d)
 
         if 'Prophet' in mn:
-            m = _safe_load_model(os.path.join(MDL_DIR, f'prophet_{crop.lower()}.pkl'))
+            m = _safe_load_model(os.path.join(MDL_DIR, f'prophet_{crop.lower()}.pkl'),
+                                 silent=(crop in SUPPRESS))
             if m is None:
                 return None
             fut = pd.DataFrame({'ds': pd.date_range(last + pd.Timedelta(days=1), periods=n, freq='D')})
