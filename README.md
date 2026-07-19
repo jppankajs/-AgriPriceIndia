@@ -12,6 +12,14 @@
 
 ---
 
+## 🚀 Live Demo
+
+**[▶ Open Live Dashboard → AgriPrice India](https://exy6dhbxciybhacpa3wve5.streamlit.app/)**
+
+> Interactive price tracking, 8-week forecasts, and Sell / Hold / Monitor signals for 5 Indian agricultural commodities — powered by Streamlit Cloud.
+
+---
+
 ## 📌 Project Overview
 
 **AgriPrice India** is a five-phase analytics project that applies time-series forecasting to government-sourced Indian agricultural market data (Agmarknet via Kaggle). The result is an interactive Streamlit dashboard that produces **Sell / Hold / Monitor** signals for five key commodities, helping farmers and traders make data-informed decisions.
@@ -165,13 +173,6 @@ Regenerate these by running the pipeline scripts in order: Phase 0 → 1 → 3.
 
 ---
 
-## 🚀 Demo
-
-**🔗 [Live Dashboard: AgriPrice India](https://exy6dhbxciybhacpa3wve5.streamlit.app/)**
-
-You can access the live interactive dashboard above. The app provides market interventions and forecasting signals.
-
-Alternatively, to run the dashboard locally, follow the [Running the Dashboard](#-running-the-dashboard) instructions above.
 
 ---
 
