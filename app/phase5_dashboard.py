@@ -202,7 +202,7 @@ st.markdown(cards_html, unsafe_allow_html=True)
 bcols = st.columns(5)
 for i, c in enumerate(CROPS):
     with bcols[i]:
-        if st.button(f"{EMOJIS[c]} {c}", key=f"b_{c}", width='stretch',
+        if st.button(f"{EMOJIS[c]} {c}", key=f"b_{c}", use_container_width=True,
                      type="primary" if c == sel else "secondary"):
             st.session_state.crop = c
             st.rerun()
@@ -341,7 +341,7 @@ fig.update_layout(template=None, plot_bgcolor='#0a0e17', paper_bgcolor='#0a0e17'
                tickfont=dict(color='#8b949e'), linecolor='#21262d', tickformat=',',
                range=[ylo - pad, yhi + pad]),
     hovermode='x unified')
-st.plotly_chart(fig, width='stretch', config={'displayModeBar': True, 'scrollZoom': True})
+st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': True, 'scrollZoom': True})
 
 # ── Model Comparison ──────────────────────────────────────────────────
 st.markdown('<div class="sec-hdr">🔬 Model Comparison — All Crops (Phase 3)</div>', unsafe_allow_html=True)
